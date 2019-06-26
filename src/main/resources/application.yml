@@ -1,7 +1,7 @@
 resilience4j:
   metrics: true
   prometheus: true
-  circuitBreaker:
+  circuitbreaker:
     configs:
       default:
         ringBufferSizeInClosedState: 10
@@ -56,7 +56,7 @@ resilience4j:
       backendB:
         maxWaitTimeDuration: PT0.01S
         maxConcurrentCall: 20
-  threadPoolBulkhead:
+  threadpoolbulkhead:
     configs:
       default:
         threadPoolProperties:
@@ -71,7 +71,7 @@ resilience4j:
           maxThreadPoolSize: 1
           coreThreadPoolSize: 1
           queueCapacity: 1
-  rateLimiter:
+  ratelimiter:
     configs:
       default:
         limitForPeriod: 10
