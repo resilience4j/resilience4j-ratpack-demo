@@ -1,5 +1,6 @@
 resilience4j:
   metrics: true
+  prometheus: true
   circuitBreaker:
     configs:
       default:

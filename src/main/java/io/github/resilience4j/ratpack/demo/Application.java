@@ -7,6 +7,7 @@ import io.github.resilience4j.ratpack.demo.chain.BackendBChain;
 import io.github.resilience4j.ratpack.demo.chain.BackendCChain;
 import io.github.resilience4j.ratpack.demo.config.ApplicationModule;
 import ratpack.dropwizard.metrics.DropwizardMetricsModule;
+import ratpack.dropwizard.metrics.MetricsPrometheusHandler;
 import ratpack.guice.Guice;
 import ratpack.server.RatpackServer;
 
@@ -28,6 +29,7 @@ public class Application {
                         .prefix("backendA", BackendAChain.class)
                         .prefix("backendB", BackendBChain.class)
                         .prefix("backendC", BackendCChain.class)
+                        .get("actuator/prometheus", new MetricsPrometheusHandler())
                 )
         );
     }
