@@ -1,0 +1,86 @@
+resilience4j:
+  metrics: true
+  circuitBreaker:
+    configs:
+      default:
+        ringBufferSizeInClosedState: 10
+        ringBufferSizeInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: PT2S
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+        ignoreExceptions:
+          - io.github.resilience4j.ratpack.demo.exception.BusinessException
+      shared:
+        ringBufferSizeInClosedState: 100
+        ringBufferSizeInHalfOpenState: 30
+        waitDurationInOpenState: PT1S
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+        ignoreExceptions:
+          - io.github.resilience4j.ratpack.demo.exception.BusinessException
+    instances:
+      backendA:
+        baseConfig: default
+        ringBufferSizeInClosedState: 5
+      backendB:
+        ringBufferSizeInClosedState: 10
+        ringBufferSizeInHalfOpenState: 3
+        waitDurationInOpenState: PT1S
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+        recordFailurePredicate: io.github.resilience4j.ratpack.demo.exception.RecordFailurePredicate
+  retry:
+    configs:
+      default:
+        maxRetryAttempts: 2
+        waitDuration: 100
+        retryExceptions:
+          - io.github.resilience4j.ratpack.demo.exception.ServerException
+          - java.io.IOException
+        ignoreExceptions:
+          - io.github.resilience4j.ratpack.demo.exception.BusinessException
+    instances:
+      backendA:
+        maxRetryAttempts: 3
+      backendB:
+        maxRetryAttempts: 3
+  bulkhead:
+    configs:
+      default:
+        maxConcurrentCall: 100
+    instances:
+      backendA:
+        maxConcurrentCall: 10
+      backendB:
+        maxWaitTimeDuration: PT0.01S
+        maxConcurrentCall: 20
+  threadPoolBulkhead:
+    configs:
+      default:
+        threadPoolProperties:
+          maxThreadPoolSize: 4
+          coreThreadPoolSize: 2
+          queueCapacity: 2
+    instances:
+      backendA:
+        baseConfig: default
+      backendB:
+        threadPoolProperties:
+          maxThreadPoolSize: 1
+          coreThreadPoolSize: 1
+          queueCapacity: 1
+  rateLimiter:
+    configs:
+      default:
+        limitForPeriod: 10
+        limitRefreshPeriod: PT1S
+        timeoutDuration: 0
+        eventConsumerBufferSize: 100
+    instances:
+      backendA:
+        baseConfig: default
+      backendB:
+        limitForPeriod: 6
+        limitRefreshPeriod: PT0.5S
+        timeoutDuration: PT3S

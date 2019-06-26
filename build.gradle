@@ -1,0 +1,37 @@
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath "io.ratpack:ratpack-gradle:1.6.1"
+	}
+}
+
+plugins {
+	id 'com.github.johnrengelman.shadow' version '5.0.0'
+	id 'java'
+	id 'groovy'
+}
+
+apply plugin: "io.ratpack.ratpack-java"
+
+repositories {
+	mavenLocal()
+//	maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+	jcenter()
+}
+
+dependencies {
+	implementation 'io.github.resilience4j:resilience4j-ratpack:0.17.0-SNAPSHOT'
+	implementation 'io.github.resilience4j:resilience4j-metrics:0.17.0-SNAPSHOT'
+	implementation 'io.ratpack:ratpack-guice:1.6.1'
+	implementation 'io.ratpack:ratpack-dropwizard-metrics:1.6.1'
+	implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.11.2'
+
+	testImplementation 'org.codehaus.groovy:groovy-all:2.5.6'
+	testImplementation 'org.spockframework:spock-core:1.2-groovy-2.5'
+	testImplementation 'io.ratpack:ratpack-groovy-test:1.6.1'
+}
+
+// Define the main class for the application
+mainClassName = 'io.github.resilience4j.ratpack.demo.Application'
