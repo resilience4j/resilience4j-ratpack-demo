@@ -12,27 +12,32 @@ See [User Guide](https://resilience4j.readme.io/docs/getting-started-5) for more
 
 1. Use docker-compose to start grafana and prometheus servers.
 - In the root folder:
-```sh
-docker-compose -f docker-compose.yml up
+```bash
+docker-compose -f docker-compose.yml up -d
 ```
-2. Start the demo project through the main class.
 
-3. Check the prometheus:
+2. Start the demo project through the main class.
+```bash
+./gradlew run
+```
+
+3. Check the application metrics:
+- Open http://localhost:5050/actuator/prometheus
+- Observe the collected prometheus metrics
+
+4. Check the status of prometheus:
 - Open http://localhost:9090
 - Access status -> Targets, both endpoints must be "UP"
 
-4. Configure the grafana:
+5. View metrics in grafana:
 - Open http://localhost:3000
-- Configure integration with Prometheus
-    - Access configuration
-    - Add data source
-    - Select prometheus
-    - Use url "http://localhost:9090" and access with value "Browser"
+- Log in with admin/admin
+- Navigate to the "Resilience4j Ratpack Demo" dashboard
 
-- Configure dashboard
-    - Access "home"
-    - Import dashboard
-    - Upload dashboard.json from /docker
+6. Run the tests and watch the metrics update.
+```bash
+./gradlew test
+```
 
 ## License
 

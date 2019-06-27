@@ -3,12 +3,20 @@ services:
   prometheus:
     image: prom/prometheus
     container_name: prometheus
-    network_mode: "host"
+    ports:
+      - "9090:9090"
     volumes:
       - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml
   grafana:
     image: grafana/grafana
     container_name: grafana
-    network_mode: "host"
+    ports:
+      - "3000:3000"
     env_file:
       - ./docker/grafana.env
+    volumes:
+      - ./docker/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./docker/dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
+      - ./docker/dashboard.json:/etc/grafana/provisioning/dashboards/dashboard.json
+
+
