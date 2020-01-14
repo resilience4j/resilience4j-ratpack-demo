@@ -39,6 +39,15 @@ docker-compose -f docker-compose.yml up -d
 ./gradlew test
 ```
 
+7. View some sample circuitbreaker events.
+static:
+```
+curl -vv http://localhost:5050/circuitbreaker/events
+```
+server sent events:
+```
+curl -vv http://localhost:5050/circuitbreaker/stream/events```
+
 ## License
 
 Copyright 2019 Dan Maas
