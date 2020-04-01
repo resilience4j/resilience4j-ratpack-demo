@@ -16,7 +16,7 @@ public class Application {
     public static RatpackServer app() throws Exception {
         return RatpackServer.of(s -> s
                 .serverConfig(c -> c
-                        .development(true)
+                        .development(false)
                         .yaml(Application.class.getClassLoader().getResource("application.yml"))
                         .require("/resilience4j", Resilience4jConfig.class)
                 )

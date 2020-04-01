@@ -1,6 +1,11 @@
 resilience4j:
   metrics: true
   prometheus: true
+  endpoints:
+    circuitbreaker:
+      enabled: true
+      path: circuitbreaker
+      eventConsumerBufferSize: 100
   circuitbreaker:
     configs:
       default:
