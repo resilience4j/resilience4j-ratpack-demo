@@ -46,7 +46,13 @@ curl -vv http://localhost:5050/circuitbreaker/events
 ```
 server sent events:
 ```
-curl -vv http://localhost:5050/circuitbreaker/stream/events```
+curl -vv http://localhost:5050/circuitbreaker/stream/events
+```
+hystrix like events:
+```
+curl -vv http://localhost:5050/circuitbreaker/hystrixStream/events
+```
+
 
 ## License
 
