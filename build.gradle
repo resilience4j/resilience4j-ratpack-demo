@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'io.github.resilience4j:resilience4j-ratpack:1.2.0'
+	implementation 'io.github.resilience4j:resilience4j-ratpack:1.6.1'
 	implementation 'io.github.resilience4j:resilience4j-metrics:1.2.0'
 	implementation 'io.github.resilience4j:resilience4j-prometheus:1.2.0'
 	implementation 'io.ratpack:ratpack-guice:1.7.5'
